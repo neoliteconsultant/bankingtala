@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+        <title>Tala Banking API</title>
+    </head>
+    <body>
+
+        <h3>Balance</h3>
+        <p>GET http://[hostname]:[port]/tala/api/v1/balance/{accountNumber}</p>
+
+        NB
+         <p>Replace [hostname] and [port] with your host name and port respectively.
+        {accountNumber} is a placeholder for account number replace it with
+        a real accountNumber (01103455 or 01106711). i.e.,</p>
+
+        <p>
+        http://localhost:8080/tala/api/v1/balance/01103455
+        </p>
+
+
+
+
+
+        <h3> Withdrawal</h3>
+
+        <p>To query balance, paste the following URL in a Rest Client.</p>
+
+        <p>PATCH http://[hostname]:[port]/tala/api/v1/withdrawal/{accountNumber}/{amount}</p>
+
+        <p>Replace [hostname] and [port] with your host name and port respectively</p>
+
+        <p>{accountNumber} and {amount} are placeholders for account number and amount respectively</p>
+
+
+
+
+        <h3> Deposits</h3>
+
+        
+        <p>To query deposit, paste the following URL in a Rest Client.</p>
+
+
+        <p>PATCH http://[hostname]:[port]/tala/api/v1/deposit{accountNumber}/{amount}</p>
+
+        <p>Replace [hostname] and [port] with your host name and port respectively</p>
+
+        <p>{accountNumber} and {amount} are placeholders for account number and amount respectively </p>
+    </body>
+
+</html>
