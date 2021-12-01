@@ -16,7 +16,6 @@ import static co.tala.bank.util.Constants.*;
 import co.tala.bank.util.CurrencyUtil;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import org.springframework.stereotype.Service;
 
 /**
@@ -99,7 +98,7 @@ public class DepositService {
             bankAccount.setAvailableBalance(newBalance);
 
             boolean isUpdated = bankAccountDAO.updateAccount(bankAccount);
-             String accountName = bankAccount.getAccountName();
+            String accountName = bankAccount.getAccountName();
 
             if (isUpdated) {
                 

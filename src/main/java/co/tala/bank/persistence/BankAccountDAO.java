@@ -88,11 +88,6 @@ public class BankAccountDAO {
     }
     
     
-    public static void findLongestName(List<String> list) {
-        Optional<String> longestName = list.stream().reduce((t, u) -> t.length() > u.length() ? t : u);
-        longestName.ifPresent(name -> {
-            System.out.printf("Get the longest name %s%n", name);
-        });
-    }
+    
 
 }

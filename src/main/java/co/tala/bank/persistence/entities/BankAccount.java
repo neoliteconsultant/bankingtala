@@ -1,5 +1,4 @@
 package co.tala.bank.persistence.entities;
-// Generated Jul 28, 2017 9:06:03 PM by Hibernate Tools 4.3.1
 
 import java.util.Date;
 import java.util.Objects;
@@ -43,7 +42,6 @@ public class BankAccount implements java.io.Serializable {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-
     @Column(name = "id", unique = true, nullable = false)
     public Integer getId() {
         return this.id;

@@ -47,13 +47,15 @@ public class BankAccountController {
      * @param accountNumber - account number to deposit to.
      * @return - account balance or error message.
      */
-    @RequestMapping(value = "/balance/{accountNumber}", produces = "application/json", headers = "Accept=application/json", method = RequestMethod.GET)
+    @RequestMapping(value = "/balance/{accountNumber}", produces = "application/json",
+	headers = "Accept=application/json", method = RequestMethod.GET)
     public @ResponseBody
     String balance(@PathVariable String accountNumber
     ) {
         try {
             ObjectMapper mapper = new ObjectMapper();
             mapper.enableDefaultTyping();
+
 
             ApiResponse apiResponse = balanceService.getBalance(accountNumber);
 
@@ -74,7 +76,8 @@ public class BankAccountController {
      * @param amount - amount to withdraw.
      * @return - new account balance or error message.
      */
-    @RequestMapping(value = "/withdrawal/{accountNumber}/{amount}", produces = "application/json", headers = "Accept=application/json", method = RequestMethod.PATCH
+    @RequestMapping(value = "/withdrawal/{accountNumber}/{amount}", 
+	produces = "application/json", headers = "Accept=application/json", method = RequestMethod.PATCH
     )
     public @ResponseBody
     String withdraw(@PathVariable String accountNumber,
@@ -105,7 +108,8 @@ public class BankAccountController {
      * @param amount - amount to deposit.
      * @return - new account balance or error message.
      */
-    @RequestMapping(value = "/deposit/{accountNumber}/{amount}", produces = "application/json", headers = "Accept=application/json", method = RequestMethod.PATCH)
+    @RequestMapping(value = "/deposit/{accountNumber}/{amount}", produces = "application/json", 
+	headers = "Accept=application/json", method = RequestMethod.PATCH)
     public @ResponseBody
     String deposit(@PathVariable String accountNumber,
             @PathVariable Double amount

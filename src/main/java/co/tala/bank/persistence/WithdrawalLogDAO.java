@@ -43,15 +43,18 @@ public class WithdrawalLogDAO {
      * otherwise.
      */
     public boolean logTransaction(WithdrawalLog withdrawalLog) {
-        boolean isAdded = false;
+        System.err.println("Withdrawal log transaction");
+        boolean isAdded = true;
         try {
             Session session = sessionFactory.openSession();
             session.save(withdrawalLog);
             session.flush();
 
-            isAdded = true;
+            
         } catch (Exception e) {
             //logger.error(e);
+            System.err.println(e.getMessage());
+            isAdded = false;
             e.printStackTrace();
         }
 

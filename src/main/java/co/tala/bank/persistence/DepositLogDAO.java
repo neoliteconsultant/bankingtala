@@ -51,15 +51,17 @@ public class DepositLogDAO {
      * otherwise.
      */
     public boolean logTransaction(DepositLog depositlog) {
-        boolean isAdded = false;
+        boolean isAdded = true;
         try {
             Session session = sessionFactory.openSession();
             session.save(depositlog);
             session.flush();
 
-            isAdded = true;
+            
         } catch (Exception e) {
-            logger.error(e);
+            //logger.error(e);
+            isAdded = false;
+            System.out.println(e.getMessage());
 
         }
 

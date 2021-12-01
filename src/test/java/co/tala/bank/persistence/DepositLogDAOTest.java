@@ -24,14 +24,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Rollback
 @Transactional(transactionManager = "transactionManager")
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/dispatcher-servlet.xml")
+@ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/dispatcher-servlet-test.xml")
 public class DepositLogDAOTest {
 
     @Resource
     private DepositLogDAO depositLogDAO;
    
     
-    private final String ACCOUNT_NUMBER="01103455";
+   
 
     public DepositLogDAOTest() {
     }
@@ -40,35 +40,36 @@ public class DepositLogDAOTest {
      * Test of {@link DepositLogDAO#logTransaction(co.tala.bank.persistence.entities.DepositLog) }.
      */
     @Test
-    @Ignore
     public void testLogTransaction() {
+        String accountNumber="0110274550067"; 
+
         LocalDateTime now = LocalDateTime.now();
         DepositLog depositLog1 = new DepositLog();
         depositLog1.setAmount(1000);
         depositLog1.setTransactionDate(now);
-        depositLog1.setAccountNumber(ACCOUNT_NUMBER);
+        depositLog1.setAccountNumber(accountNumber);
         
-        
-        DepositLog depositLog2 = new DepositLog();
-        depositLog2.setAmount(1000);
-        depositLog2.setTransactionDate(now);
-        depositLog2.setAccountNumber(ACCOUNT_NUMBER);
-
         assertTrue(depositLogDAO.logTransaction(depositLog1));
-        assertTrue(depositLogDAO.logTransaction(depositLog2));
     }
 
     /**
      * Test of {@link DepositLogDAO#getTransactionCount(co.tala.bank.persistence.entities.BankAccount, java.util.Date) }.
      */
-    @Test   
+    @Test  
     public void testGetTransactionCount() {
-      
-        
+        String accountNumber="01103300710073"; 
+        int expectedCount = 3;
+        for(int count=1;count<=expectedCount;++count){
+            DepositLog depositLog2 = new DepositLog();
+            depositLog2.setAmount(1000);
+            depositLog2.setTransactionDate(LocalDateTime.now());
+            depositLog2.setAccountNumber(accountNumber);
+            depositLogDAO.logTransaction(depositLog2);
+        }
+       
 
-        int actualCount = depositLogDAO.getTransactionCount(ACCOUNT_NUMBER, LocalDate.now());
-        
-        int expectedCount = 2+actualCount;
+        int actualCount = depositLogDAO.getTransactionCount(accountNumber, LocalDate.now());   
+       
 
         assertEquals(expectedCount, actualCount);
     }
@@ -77,15 +78,19 @@ public class DepositLogDAOTest {
      * Test of {@link DepositLogDAO#getTransactionAmount(co.tala.bank.persistence.entities.BankAccount, java.util.Date)  }.
      */
     @Test
-    @Ignore
     public void testGetTransactionAmount() {
-        double expectedAmount = 2000;
+        LocalDateTime now = LocalDateTime.now();
+        String accountNumber="01106711001623"; 
 
-        double actualAmount = depositLogDAO.getTransactionAmount(ACCOUNT_NUMBER, LocalDate.now());
-        
-        //System.out.println("Actual Amount "+actualAmount);
+        double expectedAmount = 3000;
+        DepositLog depositLog3 = new DepositLog();
+        depositLog3.setAmount(expectedAmount);
+        depositLog3.setTransactionDate(now);
+        depositLog3.setAccountNumber(accountNumber);
+        depositLogDAO.logTransaction(depositLog3);
 
-        assertEquals(expectedAmount, actualAmount,0);
+        double actualAmount = depositLogDAO.getTransactionAmount(accountNumber, LocalDate.now());
+        assertEquals(expectedAmount, actualAmount,0.01);
     }
 
 }

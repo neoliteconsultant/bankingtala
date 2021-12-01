@@ -39,9 +39,7 @@ public class DepositLog  implements java.io.Serializable {
        this.transactionDate = transactionDate;
     }
    
-     @Id @GeneratedValue(strategy=IDENTITY)
-
-    
+    @Id @GeneratedValue(strategy=IDENTITY)
     @Column(name="id", unique=true, nullable=false)
     public Integer getId() {
         return this.id;

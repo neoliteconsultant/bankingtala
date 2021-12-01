@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Rollback
 @Transactional(transactionManager = "transactionManager")
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/dispatcher-servlet.xml")
+@ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/dispatcher-servlet-test.xml")
 public class WithdrawalLogDAOTest {
 
     @Resource
@@ -28,7 +28,7 @@ public class WithdrawalLogDAOTest {
     @Resource
     private BankAccountDAO bankAccountDAO;
     
-    private final String ACCOUNT_NUMBER="01103455";
+    
 
     public WithdrawalLogDAOTest() {
     }
@@ -38,13 +38,17 @@ public class WithdrawalLogDAOTest {
      */
     @Test 
     public void testLogTransaction() {
+        final String accountNumber="0110274550067";
        
         WithdrawalLog withdrawalLog = new WithdrawalLog();
-        withdrawalLog.setAmount(490);
+        withdrawalLog.setAmount(19000);
         withdrawalLog.setTransactionDate(new Date());
-        withdrawalLog.setAccountNumber(ACCOUNT_NUMBER);
+        withdrawalLog.setAccountNumber(accountNumber);
 
-        assertTrue(withdrawalLogDAO.logTransaction(withdrawalLog));
+        boolean added = withdrawalLogDAO.logTransaction(withdrawalLog);
+
+        System.out.println("Log transaction is "+added);
+        assertEquals(true,added);
     }
 
     /**
@@ -52,10 +56,17 @@ public class WithdrawalLogDAOTest {
      */
     @Test
     public void testGetTransactionCount() {
+
+        final String accountNumber ="01103300710073";
+        WithdrawalLog withdrawalLog = new WithdrawalLog();
+        withdrawalLog.setAmount(490);
+        withdrawalLog.setTransactionDate(new Date());
+        withdrawalLog.setAccountNumber(accountNumber);
+        withdrawalLogDAO.logTransaction(withdrawalLog);
       
         int expectedCount = 1;
 
-        int actualCount = withdrawalLogDAO.getTransactionCount(ACCOUNT_NUMBER, new Date());
+        int actualCount = withdrawalLogDAO.getTransactionCount(accountNumber, new Date());
 
         assertEquals(expectedCount, actualCount);
     }
@@ -65,9 +76,16 @@ public class WithdrawalLogDAOTest {
      */
     @Test
     public void testGetTransactionAmount() {
+        final String accountNumber ="01103455001553";
+        WithdrawalLog withdrawalLog = new WithdrawalLog();
+        withdrawalLog.setAmount(1000);
+        withdrawalLog.setTransactionDate(new Date());
+        withdrawalLog.setAccountNumber(accountNumber);
+        withdrawalLogDAO.logTransaction(withdrawalLog);
+
         double expectedAmount = 1000;
 
-        double actualAmount = withdrawalLogDAO.getTransactionAmount(ACCOUNT_NUMBER, new Date());
+        double actualAmount = withdrawalLogDAO.getTransactionAmount(accountNumber, new Date());
         
 
         assertEquals(expectedAmount, actualAmount,0);
