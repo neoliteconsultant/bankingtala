@@ -47,8 +47,8 @@ the following tools
     $ mvn compile war:war 
     ```
 	
-   mvn compile war:war is a maven goal that compiles and packages
-   the application as WAR file.
+    >mvn compile war:war is a maven goal that compiles and packages
+    >the application as WAR file.
   
 6. Start the application server installed in the Prerequisites section.
 
@@ -64,7 +64,7 @@ any of these endpoints, follow these instructions.
 
 ##### Balance
 
-To do a balance inquiry, paste the following URL in a Rest Client.
+To do a balance inquiry.
 
 ```
 $ curl http://[hostname]:[port]/tala/api/v1/balance/{accountNumber}
@@ -78,7 +78,7 @@ Where
 
 ##### Deposits
 
-To make a deposit, paste the following URL in a Rest Client.
+To make a deposit.
 
 ```
 $ curl --request PATCH http://[hostname]:[port]/tala/api/v1/deposit/{accountNumber}/{amount}
@@ -89,7 +89,7 @@ Where
 
 ##### Withdrawal
 
-To make a withdrawal, paste the following URL in a Rest Client.
+To make a withdrawal.
 ```
 $ curl --request PATCH http://[hostname]:[port]/tala/api/v1/withdrawal/{accountNumber}/{amount}
 ```
